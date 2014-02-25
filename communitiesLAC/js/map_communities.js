@@ -47,7 +47,7 @@ $.getJSON( "data/communities.geojson", function( data ) {communitiesLayer.addDat
 // initialize legend control
 var legend = L.control({position: 'bottomright'});
 
-//initialize html code
+// add html code to legend
 legend.onAdd = function (map_communities) {
     var div = L.DomUtil.create('div', 'info legend');
 	div.innerHTML += '<i style="background: #E6976A"></i>LARRA<br></br>';
@@ -59,10 +59,15 @@ legend.onAdd = function (map_communities) {
     return div;
 };
 
-//add the legend html code to the map
+//add the legend to the map
 legend.addTo(map_communities);
 
 // reset map bounds using Zoom to Extent button
 function zoomOut() {
     map_communities.fitBounds(communitiesLayer);
 }
+
+//////////////////////////////////Experimenting with Clustering///////////////////////
+var markers = L.markerClusterGroup();
+markers.addLayer(communitiesLayer);
+markers.addTo(map_communities);
